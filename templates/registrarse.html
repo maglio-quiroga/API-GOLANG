@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+        .navbar-brand:hover {
+            scale: 1.07;
+            transition: .5s;
+        }
+        .barra-nav {
+            height: 12vh;
+        }
+        .pie-pagina {
+            display: grid;
+            justify-items: center;
+            grid-template-columns: repeat(3, 1fr);
+            padding: 20px;
+        }
+        @media (max-width: 800px) {
+            .pie-pagina {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .pie-lista {
+            display: flex;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            gap: 8px;
+        }
+        .pie-lista > a {
+            text-decoration: none;
+        }
+        .pie-lista > a:hover {
+            color: orange;
+        }
+        .bg-form {
+            padding: 25px;
+            height: 80vh;
+            display: grid;
+            place-items: center;
+            background-color: rgb(207, 207, 207);
+        }
+        .formulario {
+            padding: 45px;
+            color: white;
+            width: 32%;
+            margin-top: 10vh;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark fixed-top barra-nav">
+        <div class="container-fluid">
+            <a class="h1 navbar-brand" href="#">Sogga Shop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Opciones de Usuario</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Nosotros</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Cuenta
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="/Iniciar">Iniciar</a></li>
+                                <li><a class="dropdown-item" href="/Registrarse">Registrarse</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid bg-form">
+        <form class="formulario bg-dark" method="post" action="/Registrarse">
+            <div class="row">
+                <div class="col">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" aria-label="First name" id="nombre" name="nombre">
+                </div>
+                <div class="col">
+                    <label for="apellido" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" aria-label="Last name" id="apellido" name="apellido">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="correo">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Clave</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="clave1">
+                <div id="emailHelp" class="form-text" style="color: white;">Recuerda no compartir tu clave a terceros</div>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword2" class="form-label">Repetir Clave</label>
+                <input type="password" class="form-control" id="exampleInputPassword2" name="clave2">
+            </div>
+            
+            <button type="submit" class="btn btn-warning" style="width: 100%;">Crear Cuenta</button>
+        </form>
+    </div>
+
+    <div class="container-fluid pie-pagina bg-dark">
+        <div class="pie-lista">
+            <p class="h4">Privacidad</p>
+            <a href="#" class="h5">enlace 1</a>
+            <a href="#" class="h5">enlace 2</a>
+        </div>
+
+        <div class="pie-lista">
+            <p class="h4">Términos de Uso</p>
+            <a href="#" class="h5">enlace 1</a>
+            <a href="#" class="h5">enlace 2</a>
+        </div>
+
+        <div class="pie-lista">
+            <p class="h4">Contactos</p>
+            <a href="#" class="h5"><i class="bi bi-whatsapp"></i></a>
+            <a href="#" class="h5"><i class="bi bi-instagram"></i></a>
+        </div>
+    </div>
+
+    {{if .ClaveIncorrecta}}
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast align-items-center text-bg-warning border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Las contraseñas no coinciden.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    {{end}}
+    {{if .CamposVacios}}
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast align-items-center text-bg-warning border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    No se pueden dejar Campos Vacios.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    {{end}}
+    {{if .NombresIncorrectos}}
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast align-items-center text-bg-warning border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    El Nombre o Apellido no pueden contener numeros.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    {{end}}
+    {{if .ExisteUsuario}}
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast align-items-center text-bg-warning border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    El Email ya esta en uso.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    {{end}}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</body>
+</html>
