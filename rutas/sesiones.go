@@ -33,7 +33,7 @@ func AutenticarSoggaShop(sig http.Handler) http.Handler {
 
 func Iniciar_sesion(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
-		t, err := template.ParseFiles("static/iniciar.html")
+		t, err := template.ParseFiles("templates/iniciar.html")
 		if err != nil {
 			panic(err)
 		}
@@ -69,7 +69,7 @@ func Iniciar_sesion(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 		}
-		t, err := template.ParseFiles("static/iniciar.html")
+		t, err := template.ParseFiles("templates/iniciar.html")
 		if err != nil {
 			panic(err)
 		}
