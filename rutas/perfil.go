@@ -26,3 +26,24 @@ func PaginaPerfil(w http.ResponseWriter, r *http.Request) {
 	}
 	t.Execute(w, datos)
 }
+
+func Productos(w http.ResponseWriter, r *http.Request) {
+	//sesion := ObtenerSesion(r)
+	//var usuario modelos.Usuario
+	t, err := template.ParseFiles("templates/p-productos.html")
+	if err != nil {
+		panic(err)
+	}
+	t.Execute(w, nil)
+}
+
+func CerrarSesion(w http.ResponseWriter, r *http.Request) {
+	sesion := ObtenerSesion(r)
+	sesion.Values = make(map[interface{}]interface{})
+	err := sesion.Save(r, w)
+	if err != nil {
+		http.Error(w, "Error al guardar la sesión", http.StatusInternalServerError)
+		return
+	}
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+}

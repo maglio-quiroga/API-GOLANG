@@ -29,7 +29,9 @@ func main() {
 	enrutador.HandleFunc("/", Index)
 	enrutador.HandleFunc("/Iniciar", rutas.Iniciar_sesion).Methods("GET", "POST")
 	enrutador.HandleFunc("/Registrarse", rutas.Registrarse).Methods("GET", "POST")
+	enrutador.Handle("/salir", rutas.AutenticarSoggaShop(http.HandlerFunc(rutas.CerrarSesion)))
 	enrutador.Handle("/perfil", rutas.AutenticarSoggaShop(http.HandlerFunc(rutas.PaginaPerfil)))
+	enrutador.Handle("/productos", rutas.AutenticarSoggaShop(http.HandlerFunc(rutas.Productos)))
 
 	http.ListenAndServe(":3000", enrutador)
 
