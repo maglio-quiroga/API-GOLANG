@@ -23,7 +23,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 func main() {
 	db.Iniciar_conexion()
 	db.Database.AutoMigrate(modelos.Usuario{})
-
+	db.Database.AutoMigrate(modelos.Producto{})
 	enrutador := mux.NewRouter()
 	enrutador.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 	enrutador.HandleFunc("/", Index)
