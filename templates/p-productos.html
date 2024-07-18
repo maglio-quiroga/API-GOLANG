@@ -12,6 +12,20 @@
             margin-left: 220px; /* Ajusta este valor según el ancho de tu sidebar */
             padding: 20px;
         }
+        .grupo {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .card {
+            width: 18rem;
+            margin-bottom: 20px;
+        }
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -41,40 +55,44 @@
             </div>
             <div class="col">
                 <div class="content">
-                    {{range .Productos}}
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <img class="card-img-top" src="{{.Imagen}}" alt="Imagen del producto">
-                            <div class="card-body">
-                                <h5 class="card-title">{{.Nombre}}</h5>
-                                <p class="card-text">{{.Descripcion}}</p>
+                    <div class="grupo">
+                        {{range .Productos}}
+                        <div class="col-md-4">
+                            <div class="card mb-4">
+                                <img class="card-img-top" src="{{.Imagen}}" alt="Imagen del producto">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{.Nombre}}</h5>
+                                    <p class="card-text">{{.Descripcion}}</p>
+                                </div>
                             </div>
                         </div>
+                        {{end}}
                     </div>
-                    {{end}}
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination justify-content-center">
-                            {{if gt .CurrentPage 1}}
-                            <li class="page-item">
-                                <a class="page-link" href="/productos?page={{sub .CurrentPage 1}}" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            {{end}}
-                            {{range $i := (seq 1 .TotalPages)}}
-                            <li class="page-item {{if eq $i $.CurrentPage}}active{{end}}">
-                                <a class="page-link" href="/productos?page={{$i}}">{{$i}}</a>
-                            </li>
-                            {{end}}
-                            {{if lt .CurrentPage .TotalPages}}
-                            <li class="page-item">
-                                <a class="page-link" href="/productos?page={{add .CurrentPage 1}}" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                            {{end}}
-                        </ul>
-                    </nav>
+                    <div class="pagination-container">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                {{if gt .PaginaActual 1}}
+                                <li class="page-item">
+                                    <a class="page-link" href="/productos?page={{sub .PaginaActual 1}}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                {{end}}
+                                {{range $i := (seq 1 .PaginasTotal)}}
+                                <li class="page-item {{if eq $i $.PaginaActual}}active{{end}}">
+                                    <a class="page-link" href="/productos?page={{$i}}">{{$i}}</a>
+                                </li>
+                                {{end}}
+                                {{if lt .PaginaActual .PaginasTotal}}
+                                <li class="page-item">
+                                    <a class="page-link" href="/productos?page={{add .PaginaActual 1}}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                                {{end}}
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
