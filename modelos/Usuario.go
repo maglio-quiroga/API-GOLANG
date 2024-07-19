@@ -8,4 +8,5 @@ type Usuario struct {
 	Apellido string `gorm:"not null"`
 	Email    string `gorm:"not null;unique_index"`
 	Clave    string `gorm:"not null"`
+	Permisos bool   `gorm:"not null"`
 }

@@ -133,7 +133,7 @@ func Registrarse(w http.ResponseWriter, r *http.Request) {
 		ClaveEncriptada := hex.EncodeToString(hash.Sum(nil))
 		if data["ClaveIncorrecta"] == false && data["CamposVacios"] == false && data["NombresIncorrectos"] == false && data["ExisteUsuario"] == false {
 			fmt.Println("Las credenciales son correctas")
-			registro := &modelos.Usuario{Nombre: nombre, Apellido: apellido, Email: email, Clave: ClaveEncriptada}
+			registro := &modelos.Usuario{Nombre: nombre, Apellido: apellido, Email: email, Clave: ClaveEncriptada, Permisos: false}
 			resp := db.Database.Create(registro)
 			if resp.Error != nil {
 				fmt.Println("ERROR")
