@@ -32,6 +32,7 @@ func main() {
 	enrutador.Handle("/salir", rutas.AutenticarSoggaShop(http.HandlerFunc(rutas.CerrarSesion)))
 	enrutador.Handle("/perfil", rutas.AutenticarSoggaShop(http.HandlerFunc(rutas.PaginaPerfil)))
 	enrutador.Handle("/productos", rutas.AutenticarSoggaShop(http.HandlerFunc(rutas.Productos)))
+	enrutador.Handle("/adm-inicio", rutas.AutenticarAdm(http.HandlerFunc(rutas.InicioAdm)))
 
 	http.ListenAndServe(":3000", enrutador)
 

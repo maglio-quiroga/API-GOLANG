@@ -31,6 +31,21 @@ func AutenticarSoggaShop(sig http.Handler) http.Handler {
 	})
 }
 
+func AutenticarAdm(sig http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		sesion := ObtenerSesion(r)
+		if sesion.Values["user_id"] == nil {
+			http.Redirect(w, r, "/Iniciar", http.StatusFound)
+			return
+		}
+		if sesion.Values["permisos"] == nil {
+			http.Redirect(w, r, "/Iniciar", http.StatusFound)
+			return
+		}
+		sig.ServeHTTP(w, r)
+	})
+}
+
 func Iniciar_sesion(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		t, err := template.ParseFiles("templates/iniciar.html")
@@ -60,6 +75,15 @@ func Iniciar_sesion(w http.ResponseWriter, r *http.Request) {
 		}
 		if data["CamposVacios"] == false && data["NoExiste"] == false {
 			if err := db.Database.Where("email = ? AND clave = ?", email, ClaveEncriptada).First(&usuario).Error; err == nil {
+
+				if err := db.Database.Where("email = ? AND clave = ? AND permisos = true", email, ClaveEncriptada).First(&usuario).Error; err == nil {
+					sesion := ObtenerSesion(r)
+					sesion.Values["user_id"] = usuario.ID
+					sesion.Values["permisos"] = usuario.Permisos
+					sesion.Save(r, w)
+					http.Redirect(w, r, "/adm-inicio", http.StatusFound)
+					return
+				}
 
 				sesion := ObtenerSesion(r)
 				sesion.Values["user_id"] = usuario.ID
