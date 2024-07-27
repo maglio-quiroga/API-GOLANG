@@ -46,9 +46,52 @@
                 </div>
             </div>
             <div class="col">
+                <!--  LOS FORMULARIOS LES TENGO QUE AGREGAR UN ACTION A UNA URL CON MIDLEWARE INCLUIDO  -->
                 <div class="content container-fluid">
                     <div class="bg-dark text-white p-3 text-center">Gestion de inicio de Pagina</div>
-                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>titulo</th>
+                                <th>Directorio</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <label for="titulo" class="form-label">Titulo</label>
+                        <input type="text" class="form-control" aria-label="First name" id="titulo" name="tituloimg">
+                        <label for="formFile" class="form-label">Imagen del Banner</label>
+                        <input class="form-control" type="file" id="formFile" name="imgfile">
+                        <button type="submit" class="btn btn-warning">Aplicar</button>
+                    </form>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Descripcion</th>
+                                <th>Fecha Termino</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                    <form action="" method="post">
+                        <label for="titulo" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" aria-label="First name" id="titulo" name="tituloimg">
+                        <label for="exampleFormControlTextarea1" class="form-label">Descripcion</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <label for="fechainput" class="form-label">Fecha de Termino</label>
+                        <input type="date" name="fecha" id="fechainput"  class="form-control">
+                        <button type="submit" class="btn btn-warning">Aplicar</button>
+                    </form>
                 </div>
             </div>
         </div>
