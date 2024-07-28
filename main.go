@@ -24,6 +24,8 @@ func main() {
 	db.Iniciar_conexion()
 	db.Database.AutoMigrate(modelos.Usuario{})
 	db.Database.AutoMigrate(modelos.Producto{})
+	db.Database.AutoMigrate(modelos.Banner{})
+	db.Database.AutoMigrate(modelos.Evento{})
 	enrutador := mux.NewRouter()
 	enrutador.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 	enrutador.HandleFunc("/", Index)
@@ -33,6 +35,7 @@ func main() {
 	enrutador.Handle("/perfil", rutas.AutenticarSoggaShop(http.HandlerFunc(rutas.PaginaPerfil)))
 	enrutador.Handle("/productos", rutas.AutenticarSoggaShop(http.HandlerFunc(rutas.Productos)))
 	enrutador.Handle("/adm-inicio", rutas.AutenticarAdm(http.HandlerFunc(rutas.InicioAdm)))
+	enrutador.Handle("/form-banner", rutas.AutenticarAdm(http.HandlerFunc(rutas.SubirArchivo)))
 
 	http.ListenAndServe(":3000", enrutador)
 
