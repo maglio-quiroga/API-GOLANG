@@ -66,3 +66,39 @@ func SubirArchivo(w http.ResponseWriter, r *http.Request) {
 		io.Copy(f, file)
 	}
 }
+
+func CrearEventos(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("templates/adm-inicio.html")
+		if err != nil {
+			panic(err)
+		}
+		t.Execute(w, nil)
+	} else {
+		r.ParseForm()
+		nombre := r.Form["nombre"][0]
+		desc := r.Form["desc"][0]
+		fecha := r.Form["fecha"][0]
+		CamposVacios := false
+		if nombre == "" || desc == "" || fecha == "" {
+			CamposVacios = true
+		}
+		data := map[string]interface{}{
+			"CamposVacios": CamposVacios,
+		}
+		if nombre != "" && desc != "" && fecha != "" {
+			registro := &modelos.Evento{Nombre: nombre, Descripcion: desc, FechaTermino: fecha}
+			resp := db.Database.Create(registro)
+			if resp.Error != nil {
+				panic(resp.Error)
+			} else {
+				fmt.Println("Evento Insertado")
+			}
+		}
+		t, err := template.ParseFiles("templates/adm-inicio.html")
+		if err != nil {
+			panic(err)
+		}
+		t.Execute(w, data)
+	}
+}

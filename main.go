@@ -28,6 +28,7 @@ func main() {
 	db.Database.AutoMigrate(modelos.Evento{})
 	enrutador := mux.NewRouter()
 	enrutador.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
+	enrutador.PathPrefix("/archivos/").Handler(http.StripPrefix("/archivos/", http.FileServer(http.Dir("./archivos/"))))
 	enrutador.HandleFunc("/", Index)
 	enrutador.HandleFunc("/Iniciar", rutas.Iniciar_sesion).Methods("GET", "POST")
 	enrutador.HandleFunc("/Registrarse", rutas.Registrarse).Methods("GET", "POST")
@@ -36,6 +37,7 @@ func main() {
 	enrutador.Handle("/productos", rutas.AutenticarSoggaShop(http.HandlerFunc(rutas.Productos)))
 	enrutador.Handle("/adm-inicio", rutas.AutenticarAdm(http.HandlerFunc(rutas.InicioAdm)))
 	enrutador.Handle("/form-banner", rutas.AutenticarAdm(http.HandlerFunc(rutas.SubirArchivo)))
+	enrutador.Handle("/form-eventos", rutas.AutenticarAdm(http.HandlerFunc(rutas.CrearEventos)))
 
 	http.ListenAndServe(":3000", enrutador)
 
