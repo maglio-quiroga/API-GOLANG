@@ -16,7 +16,15 @@ func InicioAdm(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	t.Execute(w, nil)
+	var banner []modelos.Banner
+	var eventos []modelos.Evento
+	db.Database.Find(&banner)
+	db.Database.Find(&eventos)
+	data := map[string]interface{}{
+		"Banner":  banner,
+		"Eventos": eventos,
+	}
+	t.Execute(w, data)
 }
 
 func SubirArchivo(w http.ResponseWriter, r *http.Request) {
@@ -54,6 +62,7 @@ func SubirArchivo(w http.ResponseWriter, r *http.Request) {
 				panic(resp.Error)
 			} else {
 				fmt.Println("registro insertado")
+				http.Redirect(w, r, "/adm-inicio", http.StatusFound)
 			}
 		}
 		t, err := template.ParseFiles("templates/adm-inicio.html")
@@ -93,6 +102,7 @@ func CrearEventos(w http.ResponseWriter, r *http.Request) {
 				panic(resp.Error)
 			} else {
 				fmt.Println("Evento Insertado")
+				http.Redirect(w, r, "/adm-inicio", http.StatusFound)
 			}
 		}
 		t, err := template.ParseFiles("templates/adm-inicio.html")
@@ -100,5 +110,26 @@ func CrearEventos(w http.ResponseWriter, r *http.Request) {
 			panic(err)
 		}
 		t.Execute(w, data)
+	}
+}
+
+func EliminarBanner(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		r.ParseForm()
+		var banner modelos.Banner
+		id := r.Form["idbanner"][0]
+		db.Database.Where("id = ?", id).Delete(&banner)
+		http.Redirect(w, r, "/adm-inicio", http.StatusFound)
+		//faltaria agregar la eliminacion del archivo y no solo la del registro
+	}
+}
+
+func EliminarEvento(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		r.ParseForm()
+		var evento modelos.Evento
+		id := r.Form["idevento"][0]
+		db.Database.Where("id = ?", id).Delete(&evento)
+		http.Redirect(w, r, "/adm-inicio", http.StatusFound)
 	}
 }

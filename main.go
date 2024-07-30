@@ -26,6 +26,7 @@ func main() {
 	db.Database.AutoMigrate(modelos.Producto{})
 	db.Database.AutoMigrate(modelos.Banner{})
 	db.Database.AutoMigrate(modelos.Evento{})
+
 	enrutador := mux.NewRouter()
 	enrutador.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./static/"))))
 	enrutador.PathPrefix("/archivos/").Handler(http.StripPrefix("/archivos/", http.FileServer(http.Dir("./archivos/"))))
@@ -38,6 +39,8 @@ func main() {
 	enrutador.Handle("/adm-inicio", rutas.AutenticarAdm(http.HandlerFunc(rutas.InicioAdm)))
 	enrutador.Handle("/form-banner", rutas.AutenticarAdm(http.HandlerFunc(rutas.SubirArchivo)))
 	enrutador.Handle("/form-eventos", rutas.AutenticarAdm(http.HandlerFunc(rutas.CrearEventos)))
+	enrutador.Handle("/eliminar-banner", rutas.AutenticarAdm(http.HandlerFunc(rutas.EliminarBanner)))
+	enrutador.Handle("/eliminar-evento", rutas.AutenticarAdm(http.HandlerFunc(rutas.EliminarEvento)))
 
 	http.ListenAndServe(":3000", enrutador)
 

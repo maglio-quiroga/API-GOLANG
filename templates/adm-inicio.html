@@ -33,11 +33,6 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/usuarios-adm" class="nav-link text-white">
-                                <i class="bi bi-person-fill"></i><span class="fs-5 d-none d-sm-inline">Usuarios</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="/salir-adm" class="nav-link text-white">
                                 <i class="bi bi-x-square-fill"></i><span class="fs-5 d-none d-sm-inline">Salir</span>
                             </a>
@@ -46,7 +41,7 @@
                 </div>
             </div>
             <div class="col">
-                <!--  LOS FORMULARIOS LES TENGO QUE AGREGAR UN ACTION A UNA URL CON MIDLEWARE INCLUIDO  -->
+                <!--  LOS FORMULARIOS LES TENGO QUE AGREGAR UN ACTION A UNA URL CON MIDLEWARE INCLUIDO-LISTO  -->
                 <div class="content container-fluid">
                     <div class="bg-dark text-white p-3 text-center">Gestion de inicio de Pagina</div>
                     <table>
@@ -59,7 +54,19 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            {{range .Banner}}
+                            <tr>
+                                <th>{{.Titulo}}</th>
+                                <th>{{.Imagen}}</th>
+                                <th></th>
+                                <th>
+                                    <form action="/eliminar-banner" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
+                                        <input type="hidden" name="idbanner" value="{{.ID}}">
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                </th>
+                            </tr>
+                            {{end}}
                         </tbody>
                     </table>
                     <form action="/form-banner" method="post" enctype="multipart/form-data">
@@ -80,7 +87,20 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            {{range .Eventos}}
+                            <tr>
+                                <th>{{.Nombre}}</th>
+                                <th>{{.Descripcion}}</th>
+                                <th>{{.FechaTermino}}</th>
+                                <th></th>
+                                <th>
+                                    <form action="/eliminar-evento" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
+                                        <input type="hidden" name="idevento" value="{{.ID}}">
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                </th>
+                            </tr>
+                            {{end}}
                         </tbody>
                     </table>
                     <form action="/form-eventos" method="post">
