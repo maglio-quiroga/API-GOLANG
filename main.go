@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"text/template"
 
@@ -12,12 +11,23 @@ import (
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	vista, err := template.ParseFiles("templates/index.html")
+	t, err := template.ParseFiles("templates/index.html")
 	if err != nil {
-		fmt.Println("El nombre del archivo o el directorio son incorrectos")
 		panic(err)
 	}
-	vista.ExecuteTemplate(w, "index.html", nil)
+	var eventos []modelos.Evento
+	var banner []modelos.Banner
+	var productos []modelos.Producto
+	db.Database.Find(&banner)
+	db.Database.Find(&eventos)
+	db.Database.Order("id desc").Limit(3).Find(&productos)
+	data := map[string]interface{}{
+		"Eventos":   eventos,
+		"Banner":    banner,
+		"Productos": productos,
+	}
+
+	t.Execute(w, data)
 }
 
 func main() {
