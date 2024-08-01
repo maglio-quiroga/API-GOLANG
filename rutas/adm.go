@@ -133,3 +133,14 @@ func EliminarEvento(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/adm-inicio", http.StatusFound)
 	}
 }
+
+func CerrarAdm(w http.ResponseWriter, r *http.Request) {
+	sesion := ObtenerSesion(r)
+	sesion.Values = make(map[interface{}]interface{})
+	err := sesion.Save(r, w)
+	if err != nil {
+		http.Error(w, "Error al guardar la sesión", http.StatusInternalServerError)
+		return
+	}
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+}

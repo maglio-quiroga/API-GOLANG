@@ -92,7 +92,36 @@
                                 <th>{{.Nombre}}</th>
                                 <th>{{.Descripcion}}</th>
                                 <th>{{.FechaTermino}}</th>
-                                <th></th>
+                                <th>
+                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#{{.ID}}">
+                                        Actualizar
+                                    </button>
+                                    
+                                    <div class="modal fade" id="{{.ID}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="/act-eventos" method="post">
+                                                    <label for="titulo" class="form-label">Nombre</label>
+                                                    <input type="text" class="form-control" aria-label="First name" id="titulo" name="nombre" value="{{.Nombre}}">
+                                                    <label for="exampleFormControlTextarea1" class="form-label">Descripcion</label>
+                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="desc">{{.Descripcion}}</textarea>
+                                                    <label for="fechainput" class="form-label">Fecha de Termino</label>
+                                                    <input type="date" name="fecha" id="fechainput"  class="form-control" value="{{.FechaTermino}}">
+                                                    <button type="submit" class="btn btn-warning" style="width: 100%;">Aplicar Cambios</button>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <p>has seleccionado a {{.Nombre}}</p>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </th>
                                 <th>
                                     <form action="/eliminar-evento" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
                                         <input type="hidden" name="idevento" value="{{.ID}}">

@@ -51,6 +51,7 @@ func main() {
 	enrutador.Handle("/form-eventos", rutas.AutenticarAdm(http.HandlerFunc(rutas.CrearEventos)))
 	enrutador.Handle("/eliminar-banner", rutas.AutenticarAdm(http.HandlerFunc(rutas.EliminarBanner)))
 	enrutador.Handle("/eliminar-evento", rutas.AutenticarAdm(http.HandlerFunc(rutas.EliminarEvento)))
+	enrutador.Handle("/salir-adm", rutas.AutenticarAdm(http.HandlerFunc(rutas.CerrarAdm)))
 
 	http.ListenAndServe(":3000", enrutador)
 
