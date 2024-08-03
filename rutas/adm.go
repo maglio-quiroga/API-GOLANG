@@ -134,6 +134,25 @@ func EliminarEvento(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func ActualizarEvento(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		r.ParseForm()
+		id := r.Form["idactevento"][0]
+		nombrenuevo := r.Form["nombreactevento"][0]
+		descnuevo := r.Form["descactevento"][0]
+		fechanuevo := r.Form["fechaactevento"][0]
+		if id != "" && nombrenuevo != "" && descnuevo != "" && fechanuevo != "" {
+			db.Database.Model(&modelos.Evento{}).Where("id = ?", id).Updates(modelos.Evento{
+				Nombre:       nombrenuevo,
+				Descripcion:  descnuevo,
+				FechaTermino: fechanuevo,
+			})
+		}
+		http.Redirect(w, r, "/adm-inicio", http.StatusFound)
+	}
+
+}
+
 func CerrarAdm(w http.ResponseWriter, r *http.Request) {
 	sesion := ObtenerSesion(r)
 	sesion.Values = make(map[interface{}]interface{})

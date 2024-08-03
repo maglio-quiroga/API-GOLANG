@@ -106,12 +106,13 @@
                                             </div>
                                             <div class="modal-body">
                                                 <form action="/act-eventos" method="post">
+                                                    <input type="hidden" name="idactevento" value="{{.ID}}">
                                                     <label for="titulo" class="form-label">Nombre</label>
-                                                    <input type="text" class="form-control" aria-label="First name" id="titulo" name="nombre" value="{{.Nombre}}">
+                                                    <input type="text" class="form-control" aria-label="First name" id="titulo" name="nombreactevento" value="{{.Nombre}}">
                                                     <label for="exampleFormControlTextarea1" class="form-label">Descripcion</label>
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="desc">{{.Descripcion}}</textarea>
+                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descactevento">{{.Descripcion}}</textarea>
                                                     <label for="fechainput" class="form-label">Fecha de Termino</label>
-                                                    <input type="date" name="fecha" id="fechainput"  class="form-control" value="{{.FechaTermino}}">
+                                                    <input type="date" name="fechaactevento" id="fechainput"  class="form-control" value="{{.FechaTermino}}">
                                                     <button type="submit" class="btn btn-warning" style="width: 100%;">Aplicar Cambios</button>
                                                 </form>
                                             </div>
