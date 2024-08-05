@@ -50,7 +50,6 @@
                                 <th>titulo</th>
                                 <th>Directorio</th>
                                 <th></th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,7 +57,6 @@
                             <tr>
                                 <th>{{.Titulo}}</th>
                                 <th>{{.Imagen}}</th>
-                                <th></th>
                                 <th>
                                     <form action="/eliminar-banner" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este registro?');">
                                         <input type="hidden" name="idbanner" value="{{.ID}}">
